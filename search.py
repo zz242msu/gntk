@@ -19,7 +19,7 @@ def search(dataset, data_dir):
         dataset, i)).astype(int) for i in range(1, 11)]
 
     C_list = np.logspace(-2, 4, 120)
-    svc = SVC(kernel='precomputed', cache_size=16000, max_iter=5e5)
+    svc = SVC(kernel='precomputed', cache_size=16000, max_iter=500000)
     clf = GridSearchCV(svc, {'C' : C_list}, 
                 cv=zip(train_fold_idx, test_fold_idx),
                 n_jobs=80, verbose=0, return_train_score=True)
@@ -35,7 +35,7 @@ def search(dataset, data_dir):
     gram_nor /= gram_diag[:, None]
     gram_nor /= gram_diag[None, :]
 
-    svc = SVC(kernel='precomputed', cache_size=16000, max_iter=5e5)
+    svc = SVC(kernel='precomputed', cache_size=16000, max_iter=500000)
     clf = GridSearchCV(svc, {'C' : C_list},
                 cv=zip(train_fold_idx, test_fold_idx),
                 n_jobs=80, verbose=0, return_train_score=True)
